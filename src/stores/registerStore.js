@@ -2,17 +2,11 @@ import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 import axios from "axios";
 const url = "http://localhost:8000/api";
+import { Notify } from "quasar";
 
 export const registerStore = defineStore("register", {
-  state: () => ({
-    // email: "",
-    // name: "",
-    // password: "",
-    // c_password: "",
-  }),
-  // getters: {
-  //   doubleCount: (state) => state.counter * 2,
-  // },
+  state: () => ({}),
+
   actions: {
     registerForm() {
       console.log(this.email, this.password);
@@ -29,12 +23,10 @@ export const registerStore = defineStore("register", {
           console.log(response.data);
 
           this.router.push("/login");
-          alert(
-            "Usuariocreado correctamente, ingrese su nuevo usuario para entrar"
-          );
+          Notify.create("Usuario registrado correctamente, inicie sesion");
         })
         .catch((error) => {
-          alert("Usuario o contraseña no valido");
+          Notify.create("email no valido o ya existente");
           console.log(error.response);
         });
     },
